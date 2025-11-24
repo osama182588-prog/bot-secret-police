@@ -31,14 +31,18 @@ class DatabaseManager {
     }
 
     /**
-     * حفظ البيانات إلى الملف
+     * حفظ البيانات إلى الملف (non-blocking)
      */
     saveData() {
-        try {
-            fs.writeFileSync(this.dbPath, JSON.stringify(this.data, null, 2), 'utf8');
-        } catch (error) {
-            console.error('خطأ في حفظ قاعدة البيانات:', error);
-        }
+        // استخدام setImmediate لجعل العملية غير معرقلة
+        setImmediate(async () => {
+            try {
+                const fs = require('fs').promises;
+                await fs.writeFile(this.dbPath, JSON.stringify(this.data, null, 2), 'utf8');
+            } catch (error) {
+                console.error('خطأ في حفظ قاعدة البيانات:', error);
+            }
+        });
     }
 
     /**

@@ -70,7 +70,12 @@ function truncateText(text, maxLength = 100) {
  * @returns {string}
  */
 function generateUniqueId() {
-    return Date.now().toString() + Math.random().toString(36).substring(2, 9);
+    // استخدام crypto.randomUUID إذا كان متاحاً (Node.js 14.17.0+)
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+        return crypto.randomUUID();
+    }
+    // بديل: دمج timestamp مع أرقام عشوائية
+    return Date.now().toString(36) + Math.random().toString(36).substring(2, 15);
 }
 
 /**
@@ -119,8 +124,8 @@ function statusToColor(status) {
  * @returns {boolean}
  */
 function isPositiveInteger(value) {
-    const num = parseInt(value);
-    return !isNaN(num) && num > 0 && num.toString() === value;
+    const num = Number(value);
+    return !isNaN(num) && num > 0 && Number.isInteger(num);
 }
 
 /**

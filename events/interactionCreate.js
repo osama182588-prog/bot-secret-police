@@ -165,7 +165,7 @@ async function processLeaveRequest(interaction, client) {
         
         if (!managementChannel) {
             return interaction.editReply({
-                content: '❌ خطأ في النظام: لم يتم العثور على روم الإدارة.'
+                content: `❌ خطأ في النظام: لم يتم العثور على روم الإدارة (ID: ${config.channels.management}). تحقق من config.json`
             });
         }
 
@@ -281,6 +281,8 @@ async function acceptLeaveRequest(interaction, client) {
 
         // إنشاء الرتبة الجديدة
         const guild = interaction.guild;
+        // استخدام نفس الرتبة للإجازات بنفس المدة لتجنب تراكم الرتب
+        // ملاحظة: يمكن للإدارة حذف الرتب القديمة يدوياً عند الحاجة
         const roleName = `إجازة - ${request.duration} ${request.duration === 1 ? 'يوم' : 'أيام'}`;
         
         let role = guild.roles.cache.find(r => r.name === roleName);
