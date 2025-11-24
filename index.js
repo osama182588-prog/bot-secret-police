@@ -9,7 +9,7 @@ require('dotenv').config();
  */
 
 // Constants for configuration validation
-const CONFIG_PLACEHOLDERS = /^(YOUR_.*_HERE|your_.*_here)$/i;
+const CONFIG_PLACEHOLDERS = /^your_.+_here$/i;
 const ERROR_BORDER = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
 
 /**
