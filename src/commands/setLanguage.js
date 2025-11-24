@@ -6,12 +6,10 @@ const { t } = require('../utils/lang');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('set-language')
-        .setDescription('Change the bot language')
-        .setDescriptionLocalization('ar', 'تغيير لغة البوت')
+        .setDescription('تغيير لغة البوت')
         .addStringOption(option =>
             option.setName('language')
-                .setDescription('Select language')
-                .setDescriptionLocalization('ar', 'اختر اللغة')
+                .setDescription('اختر اللغة')
                 .setRequired(true)
                 .addChoices(
                     { name: 'العربية', value: 'ar' },

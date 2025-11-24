@@ -7,24 +7,20 @@ const { t } = require('../utils/lang');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('البحث_عن_طلب')
-        .setDescription('Search for leave requests')
-        .setDescriptionLocalization('ar', 'البحث عن طلبات الإجازة')
+        .setDescription('البحث عن طلبات الإجازة')
         .addStringOption(option =>
             option.setName('request_id')
-                .setDescription('Request ID (e.g., PL-0001)')
-                .setDescriptionLocalization('ar', 'رقم الطلب (مثال: PL-0001)')
+                .setDescription('رقم الطلب (مثال: PL-0001)')
                 .setRequired(false)
         )
         .addUserOption(option =>
             option.setName('member')
-                .setDescription('Member to search for')
-                .setDescriptionLocalization('ar', 'العضو المراد البحث عنه')
+                .setDescription('العضو المراد البحث عنه')
                 .setRequired(false)
         )
         .addStringOption(option =>
             option.setName('status')
-                .setDescription('Filter by status')
-                .setDescriptionLocalization('ar', 'تصفية حسب الحالة')
+                .setDescription('تصفية حسب الحالة')
                 .setRequired(false)
                 .addChoices(
                     { name: 'قيد المراجعة', value: 'pending' },
@@ -35,14 +31,12 @@ module.exports = {
         )
         .addStringOption(option =>
             option.setName('start_date')
-                .setDescription('Start date (YYYY-MM-DD)')
-                .setDescriptionLocalization('ar', 'تاريخ البداية (YYYY-MM-DD)')
+                .setDescription('تاريخ البداية (YYYY-MM-DD)')
                 .setRequired(false)
         )
         .addStringOption(option =>
             option.setName('end_date')
-                .setDescription('End date (YYYY-MM-DD)')
-                .setDescriptionLocalization('ar', 'تاريخ النهاية (YYYY-MM-DD)')
+                .setDescription('تاريخ النهاية (YYYY-MM-DD)')
                 .setRequired(false)
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles),
