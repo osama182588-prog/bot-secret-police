@@ -1,12 +1,87 @@
 const { Client, GatewayIntentBits, Collection, REST, Routes } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
-const config = require('./config.json');
+require('dotenv').config();
 
 /**
  * بوت نظام الإجازات للشرطة
  * Police Leave Request Bot
  */
+
+// Constants for configuration validation
+const CONFIG_PLACEHOLDERS = /^your_.+_here$/i;
+const ERROR_BORDER = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
+
+/**
+ * عرض خطأ منسق
+ * Display formatted error message
+ */
+function displayError(title, messages, exitCode = 1) {
+    console.error(`\n${ERROR_BORDER}`);
+    console.error(title);
+    console.error(`${ERROR_BORDER}\n`);
+    messages.forEach(msg => console.error(msg));
+    console.error(`${ERROR_BORDER}\n`);
+    if (exitCode !== null) {
+        process.exit(exitCode);
+    }
+}
+
+/**
+ * تحميل وتحقق من التكوين
+ * Load and validate configuration
+ */
+function loadConfig() {
+    const configFile = require('./config.json');
+    
+    // دمج التكوين من المتغيرات البيئية وملف config.json
+    // Merge configuration from environment variables and config.json
+    const config = {
+        token: process.env.DISCORD_TOKEN || configFile.token,
+        clientId: process.env.CLIENT_ID || configFile.clientId,
+        guildId: process.env.GUILD_ID || configFile.guildId,
+        channels: configFile.channels,
+        roles: configFile.roles
+    };
+
+    // التحقق من صحة التكوين
+    // Validate configuration
+    const errors = [];
+
+    if (!config.token || CONFIG_PLACEHOLDERS.test(config.token)) {
+        errors.push('❌ التوكن غير صحيح أو لم يتم تعيينه');
+        errors.push('   Token is invalid or not set');
+        errors.push('   يرجى تعيين DISCORD_TOKEN في ملف .env أو token في config.json');
+        errors.push('   Please set DISCORD_TOKEN in .env file or token in config.json');
+    }
+
+    if (!config.clientId || CONFIG_PLACEHOLDERS.test(config.clientId)) {
+        errors.push('❌ معرف التطبيق غير صحيح أو لم يتم تعيينه');
+        errors.push('   Client ID is invalid or not set');
+        errors.push('   يرجى تعيين CLIENT_ID في ملف .env أو clientId في config.json');
+        errors.push('   Please set CLIENT_ID in .env file or clientId in config.json');
+    }
+
+    if (!config.guildId || CONFIG_PLACEHOLDERS.test(config.guildId)) {
+        errors.push('❌ معرف السيرفر غير صحيح أو لم يتم تعيينه');
+        errors.push('   Guild ID is invalid or not set');
+        errors.push('   يرجى تعيين GUILD_ID في ملف .env أو guildId في config.json');
+        errors.push('   Please set GUILD_ID in .env file or guildId in config.json');
+    }
+
+    if (errors.length > 0) {
+        errors.push('\n📖 للمزيد من المعلومات، راجع:');
+        errors.push('   For more information, see:');
+        errors.push('   - SETUP.md');
+        errors.push('   - CONFIG_GUIDE.md');
+        errors.push('   - TROUBLESHOOTING.md');
+        displayError('❌ خطأ في التكوين - Configuration Error', errors);
+    }
+
+    return config;
+}
+
+const config = loadConfig();
 
 // إنشاء عميل البوت مع الصلاحيات المطلوبة
 const client = new Client({
@@ -158,8 +233,22 @@ process.on('uncaughtException', error => {
 
 // تسجيل الدخول
 client.login(config.token).catch(error => {
-    console.error('❌ فشل تسجيل الدخول:', error);
-    console.error('تأكد من أن التوكن صحيح في ملف config.json');
+    const messages = [
+        'الخطأ: ' + error.message,
+        'Error: ' + error.message,
+        '\n💡 الحلول المقترحة - Suggested Solutions:',
+        '   1. تحقق من صحة التوكن في ملف config.json أو متغير DISCORD_TOKEN',
+        '      Verify the token in config.json or DISCORD_TOKEN variable',
+        '   2. تأكد من أن التوكن لم ينتهي أو يتم إعادة تعيينه',
+        '      Make sure the token has not expired or been reset',
+        '   3. احصل على توكن جديد من Discord Developer Portal',
+        '      Get a new token from Discord Developer Portal',
+        '      https://discord.com/developers/applications',
+        '\n📖 للمزيد من المعلومات - For more information:',
+        '   - TROUBLESHOOTING.md',
+        '   - SETUP.md'
+    ];
+    displayError('❌ فشل تسجيل الدخول - Login Failed', messages);
 });
 
 module.exports = client;
