@@ -2,7 +2,80 @@
 
 ## مشاكل شائعة وحلولها
 
-### 1. البوت لا يشتغل / البوت offline
+### 1. خطأ في التكوين / Configuration Error
+
+#### الأعراض:
+- رسالة "❌ خطأ في التكوين - Configuration Error"
+- البوت يتوقف قبل بدء التشغيل
+- رسالة "التوكن غير صحيح أو لم يتم تعيينه"
+
+#### الحلول:
+
+**أ) باستخدام config.json:**
+```json
+{
+  "token": "ضع التوكن الحقيقي هنا",
+  "clientId": "ضع معرف التطبيق هنا",
+  "guildId": "ضع معرف السيرفر هنا"
+}
+```
+
+**ب) باستخدام ملف .env:**
+1. انسخ ملف `.env.example` إلى `.env`
+2. عدّل القيم:
+```bash
+# مثال - استبدل القيم بالقيم الحقيقية من Discord Developer Portal
+# Example - replace with actual values from Discord Developer Portal
+DISCORD_TOKEN=YOUR_ACTUAL_BOT_TOKEN_FROM_DISCORD
+CLIENT_ID=1234567890123456789
+GUILD_ID=9876543210987654321
+```
+
+**ج) التحقق من صحة التوكن:**
+- التوكن يجب أن يكون طويل ويحتوي على أحرف وأرقام
+- لا يجب أن يكون "YOUR_BOT_TOKEN_HERE"
+- احصل على توكن جديد من: https://discord.com/developers/applications
+
+**د) أولوية التكوين:**
+- المتغيرات البيئية (.env) لها الأولوية
+- إذا لم توجد، سيستخدم config.json
+- استخدم طريقة واحدة لتجنب الالتباس
+
+---
+
+### 2. فشل تسجيل الدخول / Login Failed
+
+#### الأعراض:
+- رسالة "❌ فشل تسجيل الدخول - Login Failed"
+- خطأ "TokenInvalid"
+- البوت لا يتصل بـ Discord
+
+#### الحلول:
+
+**أ) تحقق من صحة التوكن:**
+```bash
+# التوكن يجب أن يكون طويل ويشبه هذا النمط (ليس القيمة الفعلية):
+# Token should be long and match this pattern (not the actual value):
+# MTE...xxxxx.Gxxx...xxx.xxxxxx-xxxxx_xxxxxxxxxxxxxx
+# احصل على التوكن الحقيقي من Discord Developer Portal
+# Get your actual token from Discord Developer Portal
+```
+
+**ب) احصل على توكن جديد:**
+1. اذهب إلى https://discord.com/developers/applications
+2. اختر تطبيقك
+3. قسم "Bot"
+4. اضغط "Reset Token"
+5. انسخ التوكن الجديد
+6. ضعه في config.json أو .env
+
+**ج) تأكد من عدم مشاركة التوكن:**
+- إذا شاركت التوكن بالخطأ، أعد تعيينه فوراً
+- التوكن سري ويجب عدم مشاركته
+
+---
+
+### 3. البوت لا يشتغل / البوت offline
 
 #### الأعراض:
 - البوت يظهر offline في Discord
@@ -42,7 +115,7 @@ node --version
 
 ---
 
-### 2. الأوامر لا تظهر / Slash commands not showing
+### 4. الأوامر لا تظهر / Slash commands not showing
 
 #### الأعراض:
 - الأوامر لا تظهر عند كتابة `/`
@@ -76,7 +149,7 @@ npm start
 
 ---
 
-### 3. البوت لا يستطيع إنشاء/إعطاء الرتب
+### 5. البوت لا يستطيع إنشاء/إعطاء الرتب
 
 #### الأعراض:
 - خطأ "Missing Permissions"
@@ -108,7 +181,7 @@ npm start
 
 ---
 
-### 4. الرسائل الخاصة لا تصل للأعضاء
+### 6. الرسائل الخاصة لا تصل للأعضاء
 
 #### الأعراض:
 - الأعضاء لا يستقبلون إشعارات القبول/الرفض
@@ -130,7 +203,7 @@ npm start
 
 ---
 
-### 5. خطأ "لم يتم العثور على روم"
+### 7. خطأ "لم يتم العثور على روم"
 
 #### الأعراض:
 ```
@@ -157,7 +230,7 @@ npm start
 
 ---
 
-### 6. قاعدة البيانات فارغة / البيانات اختفت
+### 8. قاعدة البيانات فارغة / البيانات اختفت
 
 #### الأعراض:
 - `/طلباتي` يقول "لم تقم بتقديم أي طلبات"
@@ -181,7 +254,7 @@ cp database.backup.YYYYMMDD.json database.json
 
 ---
 
-### 7. الإمبيد الثابت اختفى
+### 9. الإمبيد الثابت اختفى
 
 #### الأعراض:
 - الإمبيد الثابت لم يعد موجوداً في روم طلبات الإجازات
@@ -202,7 +275,7 @@ cp database.backup.YYYYMMDD.json database.json
 
 ---
 
-### 8. النموذج (Modal) لا يفتح
+### 10. النموذج (Modal) لا يفتح
 
 #### الأعراض:
 - لا شيء يحدث عند الضغط على "تقديم إجازة"
@@ -227,7 +300,7 @@ npm start
 
 ---
 
-### 9. خطأ "Unknown Interaction"
+### 11. خطأ "Unknown Interaction"
 
 #### الأعراض:
 ```
@@ -248,7 +321,7 @@ The application did not respond
 
 ---
 
-### 10. أخطاء JSON في config.json
+### 12. أخطاء JSON في config.json
 
 #### الأعراض:
 ```

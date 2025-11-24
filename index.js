@@ -1,12 +1,74 @@
 const { Client, GatewayIntentBits, Collection, REST, Routes } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
-const config = require('./config.json');
+require('dotenv').config();
 
 /**
  * بوت نظام الإجازات للشرطة
  * Police Leave Request Bot
  */
+
+/**
+ * تحميل وتحقق من التكوين
+ * Load and validate configuration
+ */
+function loadConfig() {
+    const configFile = require('./config.json');
+    
+    // دمج التكوين من المتغيرات البيئية وملف config.json
+    // Merge configuration from environment variables and config.json
+    const config = {
+        token: process.env.DISCORD_TOKEN || configFile.token,
+        clientId: process.env.CLIENT_ID || configFile.clientId,
+        guildId: process.env.GUILD_ID || configFile.guildId,
+        channels: configFile.channels,
+        roles: configFile.roles
+    };
+
+    // التحقق من صحة التكوين
+    // Validate configuration
+    const placeholders = ['YOUR_BOT_TOKEN_HERE', 'YOUR_CLIENT_ID_HERE', 'YOUR_GUILD_ID_HERE', 'your_bot_token_here', 'your_client_id_here', 'your_guild_id_here'];
+    const errors = [];
+
+    if (!config.token || placeholders.includes(config.token)) {
+        errors.push('❌ التوكن غير صحيح أو لم يتم تعيينه');
+        errors.push('   Token is invalid or not set');
+        errors.push('   يرجى تعيين DISCORD_TOKEN في ملف .env أو token في config.json');
+        errors.push('   Please set DISCORD_TOKEN in .env file or token in config.json');
+    }
+
+    if (!config.clientId || placeholders.includes(config.clientId)) {
+        errors.push('❌ معرف التطبيق غير صحيح أو لم يتم تعيينه');
+        errors.push('   Client ID is invalid or not set');
+        errors.push('   يرجى تعيين CLIENT_ID في ملف .env أو clientId في config.json');
+        errors.push('   Please set CLIENT_ID in .env file or clientId in config.json');
+    }
+
+    if (!config.guildId || placeholders.includes(config.guildId)) {
+        errors.push('❌ معرف السيرفر غير صحيح أو لم يتم تعيينه');
+        errors.push('   Guild ID is invalid or not set');
+        errors.push('   يرجى تعيين GUILD_ID في ملف .env أو guildId في config.json');
+        errors.push('   Please set GUILD_ID in .env file or guildId in config.json');
+    }
+
+    if (errors.length > 0) {
+        console.error('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.error('❌ خطأ في التكوين - Configuration Error');
+        console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+        errors.forEach(error => console.error(error));
+        console.error('\n📖 للمزيد من المعلومات، راجع:');
+        console.error('   For more information, see:');
+        console.error('   - SETUP.md');
+        console.error('   - CONFIG_GUIDE.md');
+        console.error('   - TROUBLESHOOTING.md');
+        console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+        process.exit(1);
+    }
+
+    return config;
+}
+
+const config = loadConfig();
 
 // إنشاء عميل البوت مع الصلاحيات المطلوبة
 const client = new Client({
@@ -158,8 +220,24 @@ process.on('uncaughtException', error => {
 
 // تسجيل الدخول
 client.login(config.token).catch(error => {
-    console.error('❌ فشل تسجيل الدخول:', error);
-    console.error('تأكد من أن التوكن صحيح في ملف config.json');
+    console.error('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.error('❌ فشل تسجيل الدخول - Login Failed');
+    console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+    console.error('الخطأ:', error.message);
+    console.error('Error:', error.message);
+    console.error('\n💡 الحلول المقترحة - Suggested Solutions:');
+    console.error('   1. تحقق من صحة التوكن في ملف config.json أو متغير DISCORD_TOKEN');
+    console.error('      Verify the token in config.json or DISCORD_TOKEN variable');
+    console.error('   2. تأكد من أن التوكن لم ينتهي أو يتم إعادة تعيينه');
+    console.error('      Make sure the token has not expired or been reset');
+    console.error('   3. احصل على توكن جديد من Discord Developer Portal');
+    console.error('      Get a new token from Discord Developer Portal');
+    console.error('      https://discord.com/developers/applications\n');
+    console.error('📖 للمزيد من المعلومات - For more information:');
+    console.error('   - TROUBLESHOOTING.md');
+    console.error('   - SETUP.md');
+    console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+    process.exit(1);
 });
 
 module.exports = client;
