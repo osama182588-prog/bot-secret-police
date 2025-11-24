@@ -1,6 +1,7 @@
 const { Events, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const database = require('../database');
 const config = require('../config.json');
+const utils = require('../utils');
 
 /**
  * معالج تفاعلات الأزرار والنماذج
@@ -139,15 +140,14 @@ async function processLeaveRequest(interaction, client) {
         const endDate = interaction.fields.getTextInputValue('leave_end_date');
 
         // التحقق من صحة المدة
-        if (isNaN(duration) || parseInt(duration) <= 0) {
+        if (!utils.isPositiveInteger(duration)) {
             return interaction.editReply({
                 content: '❌ يجب أن تكون مدة الإجازة رقماً صحيحاً موجباً.'
             });
         }
 
         // التحقق من صحة التواريخ
-        const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-        if (!dateRegex.test(startDate) || !dateRegex.test(endDate)) {
+        if (!utils.isValidDateFormat(startDate) || !utils.isValidDateFormat(endDate)) {
             return interaction.editReply({
                 content: '❌ يجب أن تكون التواريخ بصيغة YYYY-MM-DD (مثال: 2024-12-25)'
             });
