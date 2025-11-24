@@ -52,6 +52,16 @@ module.exports = {
         let filename;
 
         if (format === 'csv') {
+            // Helper function to escape CSV values
+            const escapeCsvValue = (value) => {
+                if (value === null || value === undefined) return '';
+                const strValue = String(value);
+                if (strValue.includes('"') || strValue.includes(',') || strValue.includes('\n')) {
+                    return `"${strValue.replace(/"/g, '""')}"`;
+                }
+                return strValue;
+            };
+
             // Generate CSV
             const headers = [
                 'Request ID',
@@ -74,7 +84,7 @@ module.exports = {
                 leave.request_id,
                 leave.user_id,
                 leave.username,
-                `"${leave.reason.replace(/"/g, '""')}"`,
+                escapeCsvValue(leave.reason),
                 leave.duration,
                 leave.start_date,
                 leave.end_date,
@@ -84,7 +94,7 @@ module.exports = {
                 leave.updated_at,
                 leave.processed_by || '',
                 leave.processed_at || '',
-                leave.rejection_reason ? `"${leave.rejection_reason.replace(/"/g, '""')}"` : ''
+                escapeCsvValue(leave.rejection_reason)
             ]);
 
             content = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');

@@ -36,7 +36,7 @@ async function handleLeaveRequestSubmission(interaction, client) {
     const duration = parseInt(durationStr);
     if (isNaN(duration) || duration <= 0) {
         return interaction.reply({
-            content: '❌ Please enter a valid number of days.',
+            content: t('messages.invalidDuration'),
             ephemeral: true
         });
     }
@@ -87,7 +87,7 @@ async function handleLeaveRequestSubmission(interaction, client) {
     // Check if entered duration matches calculated duration
     if (duration !== actualDuration) {
         return interaction.reply({
-            content: t('messages.durationMismatch') + `\n(Calculated: ${actualDuration} days)`,
+            content: t('messages.durationMismatch') + '\n' + t('messages.calculatedDays', null, { days: actualDuration }),
             ephemeral: true
         });
     }
@@ -169,7 +169,7 @@ async function handleLeaveRequestSubmission(interaction, client) {
     } catch (error) {
         console.error('Error submitting leave request:', error);
         await interaction.editReply({
-            content: '❌ An error occurred while submitting your request.'
+            content: t('messages.genericError')
         });
     }
 }
@@ -246,7 +246,7 @@ async function handleRejectionSubmission(interaction, client) {
     } catch (error) {
         console.error('Error rejecting leave:', error);
         await interaction.editReply({
-            content: '❌ An error occurred while rejecting the request.'
+            content: t('messages.genericError')
         });
     }
 }
@@ -285,7 +285,7 @@ async function handleNoteSubmission(interaction, client) {
     } catch (error) {
         console.error('Error adding note:', error);
         await interaction.editReply({
-            content: '❌ An error occurred while adding the note.'
+            content: t('messages.genericError')
         });
     }
 }

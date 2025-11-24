@@ -150,7 +150,14 @@
         "exportSuccess": "✅ Data exported successfully!",
         "embedDeployed": "✅ Embed deployed successfully!",
         "languageChanged": "✅ Language changed to: {language}",
-        "dmFailed": "⚠️ Failed to send a direct message to the member."
+        "dmFailed": "⚠️ Failed to send a direct message to the member.",
+        "invalidDuration": "❌ Please enter a valid number of days.",
+        "requestAlreadyProcessed": "❌ This request has already been processed.",
+        "onlyApprovedCanBeCancelled": "❌ Only approved leaves can be cancelled.",
+        "channelNotFound": "❌ Leave request channel not configured or not found.",
+        "genericError": "❌ An error occurred while processing your request.",
+        "calculatedDays": "(Calculated: {days} days)",
+        "leaveRoleName": "Leave - {duration} days"
     },
     "status": {
         "pending": "Pending Review",

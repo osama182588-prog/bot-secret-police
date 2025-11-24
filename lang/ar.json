@@ -150,7 +150,14 @@
         "exportSuccess": "✅ تم تصدير البيانات بنجاح!",
         "embedDeployed": "✅ تم نشر الإمبيد بنجاح!",
         "languageChanged": "✅ تم تغيير اللغة إلى: {language}",
-        "dmFailed": "⚠️ تعذر إرسال رسالة خاصة للعضو."
+        "dmFailed": "⚠️ تعذر إرسال رسالة خاصة للعضو.",
+        "invalidDuration": "❌ يرجى إدخال عدد أيام صحيح.",
+        "requestAlreadyProcessed": "❌ تم معالجة هذا الطلب بالفعل.",
+        "onlyApprovedCanBeCancelled": "❌ يمكن إلغاء الإجازات المقبولة فقط.",
+        "channelNotFound": "❌ لم يتم العثور على القناة المحددة أو لم يتم إعدادها.",
+        "genericError": "❌ حدث خطأ أثناء معالجة طلبك.",
+        "calculatedDays": "(المحسوبة: {days} أيام)",
+        "leaveRoleName": "إجازة - {duration} أيام"
     },
     "status": {
         "pending": "قيد المراجعة",

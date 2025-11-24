@@ -16,7 +16,7 @@ module.exports = {
 
         if (!channel) {
             return interaction.reply({
-                content: '❌ Leave request channel not configured or not found.',
+                content: t('messages.channelNotFound'),
                 ephemeral: true
             });
         }

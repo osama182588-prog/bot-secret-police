@@ -130,7 +130,7 @@ async function handleApprove(interaction, client) {
 
     if (leave.status !== 'pending') {
         return interaction.reply({
-            content: '❌ This request has already been processed.',
+            content: t('messages.requestAlreadyProcessed'),
             ephemeral: true
         });
     }
@@ -142,7 +142,7 @@ async function handleApprove(interaction, client) {
         const member = await guild.members.fetch(leave.user_id).catch(() => null);
 
         // Create or find leave role
-        const roleName = `إجازة - ${leave.duration} أيام`;
+        const roleName = t('messages.leaveRoleName', null, { duration: leave.duration });
         let role = guild.roles.cache.find(r => r.name === roleName);
 
         if (!role) {
@@ -221,7 +221,7 @@ async function handleReject(interaction, client) {
 
     if (leave.status !== 'pending') {
         return interaction.reply({
-            content: '❌ This request has already been processed.',
+            content: t('messages.requestAlreadyProcessed'),
             ephemeral: true
         });
     }

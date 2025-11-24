@@ -39,7 +39,7 @@ module.exports = {
 
         if (leave.status !== 'approved') {
             return interaction.editReply({
-                content: '❌ Only approved leaves can be cancelled.'
+                content: t('messages.onlyApprovedCanBeCancelled')
             });
         }
 
