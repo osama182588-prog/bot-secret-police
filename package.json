@@ -1,0 +1,28 @@
+{
+  "name": "police-leave-bot",
+  "version": "1.0.0",
+  "description": "نظام الإجازات لقسم الشرطة داخل ديسكورد",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "deploy-commands": "node src/deploy-commands.js"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "police",
+    "leave",
+    "vacation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "better-sqlite3": "^9.4.3",
+    "dotenv": "^16.4.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}

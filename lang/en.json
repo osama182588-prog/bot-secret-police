@@ -1,0 +1,187 @@
+{
+    "embeds": {
+        "leaveRequest": {
+            "title": "📋 Leave Request System",
+            "description": "Click the button below to submit a new leave request.\n\nPlease make sure to fill in all the information correctly.",
+            "footer": "Police Department - Leave System"
+        },
+        "newRequest": {
+            "title": "📝 New Leave Request",
+            "requestId": "Request ID",
+            "applicant": "Applicant",
+            "reason": "Reason",
+            "duration": "Leave Duration",
+            "days": "days",
+            "startDate": "Start Date",
+            "endDate": "End Date",
+            "status": "Status",
+            "statusPending": "⏳ Pending Review",
+            "footer": "Awaiting administration review"
+        },
+        "approved": {
+            "title": "✅ Your Leave Has Been Approved",
+            "description": "Congratulations! Your leave request has been approved.",
+            "requestId": "Request ID",
+            "reason": "Reason",
+            "duration": "Leave Duration",
+            "days": "days",
+            "startDate": "From",
+            "endDate": "To",
+            "approvedBy": "Approved by",
+            "footer": "Have a great vacation!"
+        },
+        "rejected": {
+            "title": "❌ Your Leave Request Was Rejected",
+            "description": "We regret to inform you that your leave request has been rejected.",
+            "requestId": "Request ID",
+            "reason": "Reason",
+            "rejectedBy": "Rejected by",
+            "adminNote": "Admin Note",
+            "footer": "You can apply again later"
+        },
+        "cancelled": {
+            "title": "🚫 Your Leave Has Been Cancelled",
+            "description": "Your leave has been cancelled by the administration.",
+            "requestId": "Request ID",
+            "cancelledBy": "Cancelled by",
+            "footer": "Contact administration for more information"
+        },
+        "myRequests": {
+            "title": "📋 Your Previous Requests",
+            "noRequests": "No previous requests found.",
+            "page": "Page"
+        },
+        "statistics": {
+            "title": "📊 Leave Statistics",
+            "totalRequests": "Total Requests",
+            "approved": "Approved",
+            "rejected": "Rejected",
+            "pending": "Pending",
+            "cancelled": "Cancelled",
+            "topMembers": "Top Members by Leave Count",
+            "averageDuration": "Average Leave Duration",
+            "lastMonth": "Last Month"
+        },
+        "log": {
+            "newRequest": "📝 New Leave Request",
+            "approved": "✅ Leave Request Approved",
+            "rejected": "❌ Leave Request Rejected",
+            "cancelled": "🚫 Leave Cancelled",
+            "noteAdded": "📝 Note Added",
+            "statusChanged": "🔄 Status Changed",
+            "roleAssigned": "🏷️ Leave Role Assigned",
+            "roleRemoved": "🏷️ Leave Role Removed",
+            "previousStatus": "Previous Status",
+            "newStatus": "New Status",
+            "changedBy": "Changed by",
+            "timestamp": "Timestamp"
+        },
+        "notification": {
+            "newRequest": "🔔 New Leave Request",
+            "description": "A new leave request has been submitted and is pending review.",
+            "clickToView": "Click to view"
+        },
+        "reminder": {
+            "title": "⏰ Leave Ending Reminder",
+            "description": "Your leave is ending soon.",
+            "endsOn": "Ends on",
+            "requestId": "Request ID"
+        },
+        "systemLocked": {
+            "title": "🔒 Leave System Locked",
+            "description": "The leave system is temporarily locked by the administration.\n\nPlease try again later."
+        },
+        "search": {
+            "title": "🔍 Search Results",
+            "noResults": "No results found."
+        }
+    },
+    "buttons": {
+        "submitLeave": "📝 Submit Leave",
+        "approve": "✔️ Approve",
+        "reject": "❌ Reject",
+        "addNote": "📝 Add Note",
+        "cancel": "🚫 Cancel",
+        "next": "Next ▶️",
+        "previous": "◀️ Previous",
+        "close": "Close"
+    },
+    "modal": {
+        "leaveRequest": {
+            "title": "Submit Leave Request",
+            "reasonLabel": "Leave Reason",
+            "reasonPlaceholder": "Enter the reason for leave...",
+            "durationLabel": "Leave Duration (number of days)",
+            "durationPlaceholder": "Example: 5",
+            "startDateLabel": "Leave Start Date",
+            "startDatePlaceholder": "YYYY-MM-DD (e.g., 2024-01-15)",
+            "endDateLabel": "Leave End Date",
+            "endDatePlaceholder": "YYYY-MM-DD (e.g., 2024-01-20)"
+        },
+        "addNote": {
+            "title": "Add Note",
+            "noteLabel": "Note",
+            "notePlaceholder": "Write your note here..."
+        },
+        "rejectReason": {
+            "title": "Rejection Reason",
+            "reasonLabel": "Reason for rejection",
+            "reasonPlaceholder": "Enter rejection reason (optional)..."
+        }
+    },
+    "messages": {
+        "requestSubmitted": "✅ Leave request submitted successfully!\nRequest ID: {requestId}",
+        "requestApproved": "✅ Request approved successfully!",
+        "requestRejected": "❌ Request rejected.",
+        "requestCancelled": "🚫 Leave cancelled successfully.",
+        "noteAdded": "📝 Note added successfully.",
+        "noPermission": "❌ You don't have permission to perform this action.",
+        "systemLocked": "🔒 The leave system is currently locked.",
+        "systemUnlocked": "🔓 The leave system has been unlocked.",
+        "systemLockedSuccess": "🔒 The leave system has been locked.",
+        "invalidDate": "❌ The entered date is invalid.",
+        "startDatePast": "❌ Start date cannot be in the past.",
+        "endDateBeforeStart": "❌ End date cannot be before start date.",
+        "durationMismatch": "❌ The entered duration does not match the difference between the dates.",
+        "overlappingLeave": "❌ You have an existing leave that overlaps with this period.\nRequest ID: {requestId}\nFrom: {startDate} To: {endDate}",
+        "maxDurationExceeded": "❌ The maximum leave duration for your rank is {maxDays} days.",
+        "spamProtection": "❌ You have exceeded the maximum number of requests ({maxRequests} requests per 7 days).\nPlease wait before submitting a new request.",
+        "requestNotFound": "❌ Request not found.",
+        "exportSuccess": "✅ Data exported successfully!",
+        "embedDeployed": "✅ Embed deployed successfully!",
+        "languageChanged": "✅ Language changed to: {language}",
+        "dmFailed": "⚠️ Failed to send a direct message to the member.",
+        "invalidDuration": "❌ Please enter a valid number of days.",
+        "requestAlreadyProcessed": "❌ This request has already been processed.",
+        "onlyApprovedCanBeCancelled": "❌ Only approved leaves can be cancelled.",
+        "channelNotFound": "❌ Leave request channel not configured or not found.",
+        "genericError": "❌ An error occurred while processing your request.",
+        "calculatedDays": "(Calculated: {days} days)",
+        "leaveRoleName": "Leave - {duration} days"
+    },
+    "status": {
+        "pending": "Pending Review",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "cancelled": "Cancelled",
+        "preliminaryApproved": "Preliminary Approved",
+        "finalApproved": "Final Approved"
+    },
+    "reasons": {
+        "medical": "Medical Leave",
+        "family": "Family Emergency",
+        "travel": "Travel",
+        "other": "Other"
+    },
+    "commands": {
+        "myRequests": "View my previous requests",
+        "searchRequest": "Search for a request",
+        "statistics": "View leave statistics",
+        "cancelLeave": "Cancel a leave",
+        "export": "Export leave data",
+        "lock": "Lock leave system",
+        "unlock": "Unlock leave system",
+        "setLanguage": "Change bot language",
+        "deployEmbed": "Deploy leave request embed"
+    }
+}
