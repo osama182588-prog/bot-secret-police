@@ -10,6 +10,7 @@ require('dotenv').config();
 
 // Constants for configuration validation
 const CONFIG_PLACEHOLDERS = /^your_.+_here$/i;
+const ID_PLACEHOLDER_PATTERN = /^[A-Z_]+$/;
 const ERROR_BORDER = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
 
 /**
@@ -71,21 +72,21 @@ function loadConfig() {
 
     // التحقق من معرفات القنوات - Validate channel IDs
     if (config.channels) {
-        if (!config.channels.leaveRequests || /^[A-Z_]+$/i.test(config.channels.leaveRequests)) {
+        if (!config.channels.leaveRequests || ID_PLACEHOLDER_PATTERN.test(config.channels.leaveRequests)) {
             errors.push('❌ معرف قناة طلبات الإجازات غير صحيح أو لم يتم تعيينه');
             errors.push('   Leave requests channel ID is invalid or not set');
             errors.push('   يرجى تعيين channels.leaveRequests في config.json بمعرف صحيح');
             errors.push('   Please set channels.leaveRequests in config.json with a valid channel ID');
         }
         
-        if (!config.channels.management || /^[A-Z_]+$/i.test(config.channels.management)) {
+        if (!config.channels.management || ID_PLACEHOLDER_PATTERN.test(config.channels.management)) {
             errors.push('❌ معرف قناة الإدارة غير صحيح أو لم يتم تعيينه');
             errors.push('   Management channel ID is invalid or not set');
             errors.push('   يرجى تعيين channels.management في config.json بمعرف صحيح');
             errors.push('   Please set channels.management in config.json with a valid channel ID');
         }
         
-        if (!config.channels.logs || /^[A-Z_]+$/i.test(config.channels.logs)) {
+        if (!config.channels.logs || ID_PLACEHOLDER_PATTERN.test(config.channels.logs)) {
             errors.push('❌ معرف قناة السجلات غير صحيح أو لم يتم تعيينه');
             errors.push('   Logs channel ID is invalid or not set');
             errors.push('   يرجى تعيين channels.logs في config.json بمعرف صحيح');
@@ -98,14 +99,14 @@ function loadConfig() {
 
     // التحقق من معرفات الرتب - Validate role IDs
     if (config.roles) {
-        if (!config.roles.management || /^[A-Z_]+$/i.test(config.roles.management)) {
+        if (!config.roles.management || ID_PLACEHOLDER_PATTERN.test(config.roles.management)) {
             errors.push('❌ معرف رتبة الإدارة غير صحيح أو لم يتم تعيينه');
             errors.push('   Management role ID is invalid or not set');
             errors.push('   يرجى تعيين roles.management في config.json بمعرف صحيح');
             errors.push('   Please set roles.management in config.json with a valid role ID');
         }
         // rejectedLeave is optional, so we only validate if it's not empty
-        if (config.roles.rejectedLeave && /^[A-Z_]+$/i.test(config.roles.rejectedLeave)) {
+        if (config.roles.rejectedLeave && ID_PLACEHOLDER_PATTERN.test(config.roles.rejectedLeave)) {
             errors.push('❌ معرف رتبة الإجازة المرفوضة غير صحيح');
             errors.push('   Rejected leave role ID is invalid');
             errors.push('   يرجى تعيين roles.rejectedLeave في config.json بمعرف صحيح أو تركه فارغاً');
