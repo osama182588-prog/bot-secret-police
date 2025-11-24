@@ -1,0 +1,16 @@
+{
+  "name": "bot-secret-police",
+  "version": "1.0.0",
+  "description": "نظام طلبات الإجازات للشرطة - Police Leave Request System",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "keywords": ["discord", "bot", "police", "leave", "vacation"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.14.1"
+  }
+}
