@@ -7,12 +7,10 @@ const { t } = require('../utils/lang');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('احصائيات_الإجازات')
-        .setDescription('View leave statistics')
-        .setDescriptionLocalization('ar', 'عرض إحصائيات الإجازات')
+        .setDescription('عرض إحصائيات الإجازات')
         .addStringOption(option =>
             option.setName('period')
-                .setDescription('Time period for statistics')
-                .setDescriptionLocalization('ar', 'الفترة الزمنية للإحصائيات')
+                .setDescription('الفترة الزمنية للإحصائيات')
                 .setRequired(false)
                 .addChoices(
                     { name: 'الكل', value: 'all' },

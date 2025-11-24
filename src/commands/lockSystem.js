@@ -8,8 +8,7 @@ const embeds = require('../utils/embeds');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('قفل_الإجازات')
-        .setDescription('Lock the leave system')
-        .setDescriptionLocalization('ar', 'قفل نظام الإجازات')
+        .setDescription('قفل نظام الإجازات')
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
     async execute(interaction) {
