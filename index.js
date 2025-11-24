@@ -8,6 +8,25 @@ require('dotenv').config();
  * Police Leave Request Bot
  */
 
+// Constants for configuration validation
+const CONFIG_PLACEHOLDERS = /^(YOUR_.*_HERE|your_.*_here)$/i;
+const ERROR_BORDER = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
+
+/**
+ * عرض خطأ منسق
+ * Display formatted error message
+ */
+function displayError(title, messages, exitCode = 1) {
+    console.error(`\n${ERROR_BORDER}`);
+    console.error(title);
+    console.error(`${ERROR_BORDER}\n`);
+    messages.forEach(msg => console.error(msg));
+    console.error(`${ERROR_BORDER}\n`);
+    if (exitCode !== null) {
+        process.exit(exitCode);
+    }
+}
+
 /**
  * تحميل وتحقق من التكوين
  * Load and validate configuration
@@ -27,24 +46,23 @@ function loadConfig() {
 
     // التحقق من صحة التكوين
     // Validate configuration
-    const placeholders = ['YOUR_BOT_TOKEN_HERE', 'YOUR_CLIENT_ID_HERE', 'YOUR_GUILD_ID_HERE', 'your_bot_token_here', 'your_client_id_here', 'your_guild_id_here'];
     const errors = [];
 
-    if (!config.token || placeholders.includes(config.token)) {
+    if (!config.token || CONFIG_PLACEHOLDERS.test(config.token)) {
         errors.push('❌ التوكن غير صحيح أو لم يتم تعيينه');
         errors.push('   Token is invalid or not set');
         errors.push('   يرجى تعيين DISCORD_TOKEN في ملف .env أو token في config.json');
         errors.push('   Please set DISCORD_TOKEN in .env file or token in config.json');
     }
 
-    if (!config.clientId || placeholders.includes(config.clientId)) {
+    if (!config.clientId || CONFIG_PLACEHOLDERS.test(config.clientId)) {
         errors.push('❌ معرف التطبيق غير صحيح أو لم يتم تعيينه');
         errors.push('   Client ID is invalid or not set');
         errors.push('   يرجى تعيين CLIENT_ID في ملف .env أو clientId في config.json');
         errors.push('   Please set CLIENT_ID in .env file or clientId in config.json');
     }
 
-    if (!config.guildId || placeholders.includes(config.guildId)) {
+    if (!config.guildId || CONFIG_PLACEHOLDERS.test(config.guildId)) {
         errors.push('❌ معرف السيرفر غير صحيح أو لم يتم تعيينه');
         errors.push('   Guild ID is invalid or not set');
         errors.push('   يرجى تعيين GUILD_ID في ملف .env أو guildId في config.json');
@@ -52,17 +70,12 @@ function loadConfig() {
     }
 
     if (errors.length > 0) {
-        console.error('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        console.error('❌ خطأ في التكوين - Configuration Error');
-        console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
-        errors.forEach(error => console.error(error));
-        console.error('\n📖 للمزيد من المعلومات، راجع:');
-        console.error('   For more information, see:');
-        console.error('   - SETUP.md');
-        console.error('   - CONFIG_GUIDE.md');
-        console.error('   - TROUBLESHOOTING.md');
-        console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
-        process.exit(1);
+        errors.push('\n📖 للمزيد من المعلومات، راجع:');
+        errors.push('   For more information, see:');
+        errors.push('   - SETUP.md');
+        errors.push('   - CONFIG_GUIDE.md');
+        errors.push('   - TROUBLESHOOTING.md');
+        displayError('❌ خطأ في التكوين - Configuration Error', errors);
     }
 
     return config;
@@ -220,24 +233,22 @@ process.on('uncaughtException', error => {
 
 // تسجيل الدخول
 client.login(config.token).catch(error => {
-    console.error('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    console.error('❌ فشل تسجيل الدخول - Login Failed');
-    console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
-    console.error('الخطأ:', error.message);
-    console.error('Error:', error.message);
-    console.error('\n💡 الحلول المقترحة - Suggested Solutions:');
-    console.error('   1. تحقق من صحة التوكن في ملف config.json أو متغير DISCORD_TOKEN');
-    console.error('      Verify the token in config.json or DISCORD_TOKEN variable');
-    console.error('   2. تأكد من أن التوكن لم ينتهي أو يتم إعادة تعيينه');
-    console.error('      Make sure the token has not expired or been reset');
-    console.error('   3. احصل على توكن جديد من Discord Developer Portal');
-    console.error('      Get a new token from Discord Developer Portal');
-    console.error('      https://discord.com/developers/applications\n');
-    console.error('📖 للمزيد من المعلومات - For more information:');
-    console.error('   - TROUBLESHOOTING.md');
-    console.error('   - SETUP.md');
-    console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
-    process.exit(1);
+    const messages = [
+        'الخطأ: ' + error.message,
+        'Error: ' + error.message,
+        '\n💡 الحلول المقترحة - Suggested Solutions:',
+        '   1. تحقق من صحة التوكن في ملف config.json أو متغير DISCORD_TOKEN',
+        '      Verify the token in config.json or DISCORD_TOKEN variable',
+        '   2. تأكد من أن التوكن لم ينتهي أو يتم إعادة تعيينه',
+        '      Make sure the token has not expired or been reset',
+        '   3. احصل على توكن جديد من Discord Developer Portal',
+        '      Get a new token from Discord Developer Portal',
+        '      https://discord.com/developers/applications',
+        '\n📖 للمزيد من المعلومات - For more information:',
+        '   - TROUBLESHOOTING.md',
+        '   - SETUP.md'
+    ];
+    displayError('❌ فشل تسجيل الدخول - Login Failed', messages);
 });
 
 module.exports = client;
