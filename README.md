@@ -158,6 +158,20 @@ twoStepApproval: true
 - Read Message History
 - Use Application Commands
 
+### ⚠️ Privileged Gateway Intents / النوايا المميزة
+
+يجب تفعيل النوايا التالية في بوابة مطوري Discord:
+You must enable the following intents in the Discord Developer Portal:
+
+1. انتقل إلى [Discord Developer Portal](https://discord.com/developers/applications)
+2. اختر تطبيقك / Select your application
+3. اذهب إلى **Bot** > **Privileged Gateway Intents**
+4. فعّل **SERVER MEMBERS INTENT** / Enable **SERVER MEMBERS INTENT**
+
+> ⚠️ بدون تفعيل هذه النية، سيفشل البوت في تسجيل الدخول مع خطأ "Used disallowed intents"
+>
+> ⚠️ Without enabling this intent, the bot will fail to login with "Used disallowed intents" error
+
 ## 📞 الدعم / Support
 
 إذا واجهت أي مشاكل، يرجى فتح Issue في المستودع.
