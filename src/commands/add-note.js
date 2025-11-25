@@ -30,16 +30,16 @@ module.exports = {
         const requestId = interaction.options.getString('request_id');
         const noteText = interaction.options.getString('note');
 
-        const leave = db.getLeaveRequest(requestId);
-
-        if (!leave) {
-            return interaction.reply({
-                content: t('messages.requestNotFound'),
-                ephemeral: true
-            });
-        }
-
         try {
+            const leave = db.getLeaveRequest(requestId);
+
+            if (!leave) {
+                return interaction.reply({
+                    content: t('messages.requestNotFound'),
+                    ephemeral: true
+                });
+            }
+
             db.addNote(requestId, interaction.user.id, interaction.user.username, noteText);
 
             await interaction.reply({
