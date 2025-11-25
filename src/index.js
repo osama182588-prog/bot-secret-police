@@ -10,12 +10,13 @@ const config = require('./config');
 const db = require('./database/db');
 
 // Create client instance
+// Note: GuildMembers is a privileged intent that must be enabled in the Discord Developer Portal
+// (Bot > Privileged Gateway Intents > SERVER MEMBERS INTENT)
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMembers,
         GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent,
         GatewayIntentBits.DirectMessages
     ],
     partials: [
