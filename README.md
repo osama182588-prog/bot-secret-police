@@ -81,14 +81,15 @@ A professional police department leave management system for Discord, built with
 | الأمر / Command | الوصف / Description |
 |----------------|---------------------|
 | `/deploy-embed` | نشر إمبيد طلب الإجازة / Deploy leave request embed |
-| `/طلباتي` | عرض طلباتي السابقة / View my previous requests |
-| `/البحث_عن_طلب` | البحث عن طلب / Search for a request |
-| `/احصائيات_الإجازات` | عرض الإحصائيات / View statistics |
-| `/الغاء_اجازة` | إلغاء إجازة / Cancel a leave |
-| `/تصدير_الإجازات` | تصدير البيانات / Export data |
-| `/قفل_الإجازات` | قفل النظام / Lock the system |
-| `/فتح_الإجازات` | فتح النظام / Unlock the system |
+| `/my-requests` | عرض طلباتي السابقة / View my previous requests |
+| `/search-request` | البحث عن طلب / Search for a request |
+| `/leave-statistics` | عرض الإحصائيات / View statistics |
+| `/cancel-leave` | إلغاء إجازة / Cancel a leave |
+| `/export-leaves` | تصدير البيانات / Export data |
+| `/lock-leaves` | قفل النظام / Lock the system |
+| `/unlock-leaves` | فتح النظام / Unlock the system |
 | `/set-language` | تغيير اللغة / Change language |
+| `/add-note` | إضافة ملاحظة / Add a note |
 
 ## 📁 هيكل المشروع / Project Structure
 

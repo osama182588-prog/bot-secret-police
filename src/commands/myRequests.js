@@ -4,8 +4,8 @@ const embeds = require('../utils/embeds');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('طلباتي')
-        .setDescription('View your previous leave requests'),
+        .setName('my-requests')
+        .setDescription('View your previous leave requests / عرض طلباتي السابقة'),
 
     async execute(interaction) {
         await interaction.deferReply({ ephemeral: true });

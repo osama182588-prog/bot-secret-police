@@ -6,15 +6,15 @@ const { t } = require('../utils/lang');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('add-note')
-        .setDescription('Add a note to a leave request')
+        .setDescription('Add a note to a leave request / إضافة ملاحظة لطلب إجازة')
         .addStringOption(option =>
             option.setName('request_id')
-                .setDescription('Request ID (e.g., PL-0001)')
+                .setDescription('Request ID (e.g., PL-0001) / رقم الطلب')
                 .setRequired(true)
         )
         .addStringOption(option =>
             option.setName('note')
-                .setDescription('Note to add')
+                .setDescription('Note to add / الملاحظة المراد إضافتها')
                 .setRequired(true)
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles),

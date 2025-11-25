@@ -6,16 +6,16 @@ const { t } = require('../utils/lang');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('احصائيات_الإجازات')
-        .setDescription('View leave statistics')
+        .setName('leave-statistics')
+        .setDescription('View leave statistics / عرض إحصائيات الإجازات')
         .addStringOption(option =>
             option.setName('period')
-                .setDescription('Time period for statistics')
+                .setDescription('Time period for statistics / الفترة الزمنية للإحصائيات')
                 .setRequired(false)
                 .addChoices(
-                    { name: 'الكل', value: 'all' },
-                    { name: 'آخر شهر', value: 'month' },
-                    { name: 'آخر أسبوع', value: 'week' }
+                    { name: 'All / الكل', value: 'all' },
+                    { name: 'Last Month / آخر شهر', value: 'month' },
+                    { name: 'Last Week / آخر أسبوع', value: 'week' }
                 )
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles),

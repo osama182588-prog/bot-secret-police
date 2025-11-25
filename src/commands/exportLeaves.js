@@ -5,11 +5,11 @@ const { t } = require('../utils/lang');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('تصدير_الإجازات')
-        .setDescription('Export leave data to CSV/JSON')
+        .setName('export-leaves')
+        .setDescription('Export leave data to CSV/JSON / تصدير بيانات الإجازات')
         .addStringOption(option =>
             option.setName('format')
-                .setDescription('Export format')
+                .setDescription('Export format / صيغة التصدير')
                 .setRequired(true)
                 .addChoices(
                     { name: 'CSV', value: 'csv' },
@@ -18,12 +18,12 @@ module.exports = {
         )
         .addStringOption(option =>
             option.setName('start_date')
-                .setDescription('Start date (YYYY-MM-DD)')
+                .setDescription('Start date (YYYY-MM-DD) / تاريخ البداية')
                 .setRequired(false)
         )
         .addStringOption(option =>
             option.setName('end_date')
-                .setDescription('End date (YYYY-MM-DD)')
+                .setDescription('End date (YYYY-MM-DD) / تاريخ النهاية')
                 .setRequired(false)
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
