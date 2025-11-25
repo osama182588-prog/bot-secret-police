@@ -7,11 +7,9 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('تصدير_الإجازات')
         .setDescription('Export leave data to CSV/JSON')
-        .setDescriptionLocalization('ar', 'تصدير بيانات الإجازات')
         .addStringOption(option =>
             option.setName('format')
                 .setDescription('Export format')
-                .setDescriptionLocalization('ar', 'صيغة التصدير')
                 .setRequired(true)
                 .addChoices(
                     { name: 'CSV', value: 'csv' },
@@ -21,13 +19,11 @@ module.exports = {
         .addStringOption(option =>
             option.setName('start_date')
                 .setDescription('Start date (YYYY-MM-DD)')
-                .setDescriptionLocalization('ar', 'تاريخ البداية (YYYY-MM-DD)')
                 .setRequired(false)
         )
         .addStringOption(option =>
             option.setName('end_date')
                 .setDescription('End date (YYYY-MM-DD)')
-                .setDescriptionLocalization('ar', 'تاريخ النهاية (YYYY-MM-DD)')
                 .setRequired(false)
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
