@@ -7,7 +7,7 @@ const db = require('../database/db');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('deploy-embed')
-        .setDescription('Deploy the leave request embed to the configured channel')
+        .setDescription('Deploy the leave request embed / نشر إمبيد طلب الإجازة')
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
     async execute(interaction) {

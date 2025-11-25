@@ -6,37 +6,37 @@ const { t } = require('../utils/lang');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('البحث_عن_طلب')
-        .setDescription('Search for leave requests')
+        .setName('search-request')
+        .setDescription('Search for leave requests / البحث عن طلبات الإجازة')
         .addStringOption(option =>
             option.setName('request_id')
-                .setDescription('Request ID (e.g., PL-0001)')
+                .setDescription('Request ID (e.g., PL-0001) / رقم الطلب')
                 .setRequired(false)
         )
         .addUserOption(option =>
             option.setName('member')
-                .setDescription('Member to search for')
+                .setDescription('Member to search for / العضو للبحث عنه')
                 .setRequired(false)
         )
         .addStringOption(option =>
             option.setName('status')
-                .setDescription('Filter by status')
+                .setDescription('Filter by status / تصفية حسب الحالة')
                 .setRequired(false)
                 .addChoices(
-                    { name: 'قيد المراجعة', value: 'pending' },
-                    { name: 'مقبول', value: 'approved' },
-                    { name: 'مرفوض', value: 'rejected' },
-                    { name: 'ملغى', value: 'cancelled' }
+                    { name: 'Pending / قيد المراجعة', value: 'pending' },
+                    { name: 'Approved / مقبول', value: 'approved' },
+                    { name: 'Rejected / مرفوض', value: 'rejected' },
+                    { name: 'Cancelled / ملغى', value: 'cancelled' }
                 )
         )
         .addStringOption(option =>
             option.setName('start_date')
-                .setDescription('Start date (YYYY-MM-DD)')
+                .setDescription('Start date (YYYY-MM-DD) / تاريخ البداية')
                 .setRequired(false)
         )
         .addStringOption(option =>
             option.setName('end_date')
-                .setDescription('End date (YYYY-MM-DD)')
+                .setDescription('End date (YYYY-MM-DD) / تاريخ النهاية')
                 .setRequired(false)
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles),
