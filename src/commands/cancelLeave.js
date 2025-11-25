@@ -9,11 +9,9 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('الغاء_اجازة')
         .setDescription('Cancel an existing leave')
-        .setDescriptionLocalization('ar', 'إلغاء إجازة قائمة')
         .addStringOption(option =>
             option.setName('request_id')
                 .setDescription('Request ID to cancel (e.g., PL-0001)')
-                .setDescriptionLocalization('ar', 'رقم الطلب المراد إلغاؤه (مثال: PL-0001)')
                 .setRequired(true)
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles),
